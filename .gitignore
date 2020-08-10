@@ -1,6 +1,7 @@
 # Other
 .vscode
 people.geojson
+.stylegan2-cache
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
