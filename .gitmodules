@@ -2,3 +2,7 @@
 	path = rude-carnie
 	url = https://github.com/dpressel/rude-carnie
 	ignore = all
+[submodule "stylegan2"]
+	path = stylegan2
+	url = https://github.com/NVlabs/stylegan2
+	ignore = all
