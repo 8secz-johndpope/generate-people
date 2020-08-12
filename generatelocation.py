@@ -38,6 +38,9 @@ def repeat_until(set_function, check_function):
 
 def get_coord():
     return repeat_until(
-        lambda: [(random() * 2 - 1) * 180, (acos(2 * random() - 1) / pi) * 180 - 90],
+        lambda: [
+            round((random() * 2 - 1) * 180, 3),
+            round((acos(2 * random() - 1) / pi) * 180 - 90, 3),
+        ],
         lambda coord: is_land(*coord) and coord[1] > -65,
     )
