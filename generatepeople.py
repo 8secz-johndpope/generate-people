@@ -65,7 +65,7 @@ def generate_people():
             gender = genders[row[1]]
             name = names.get_full_name(gender=gender)
             location = get_coord()
-            pathPart = os.path.splitext(os.path.basename(row[0]))[0][4:]
+            pathPart = os.path.splitext(os.path.basename(row[0]))[0]
             people.append(
                 {"gender": gender, "name": name, "location": location, "id": pathPart}
             )
