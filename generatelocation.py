@@ -16,20 +16,7 @@ lake_shp_fname = shpreader.natural_earth(
 
 
 def cut_out(multipoly1, multipoly2):
-    outmulti = []
-    for pol in multipoly1:
-        for pol2 in multipoly2:
-            if pol.intersects(pol2) == True:
-                # If they intersect, create a new polygon that is
-                # essentially pol minus the intersection
-                nonoverlap = (pol.symmetric_difference(pol2)).difference(pol2)
-                outmulti.append(nonoverlap)
-
-            else:
-                # Otherwise, just keep the initial polygon as it is.
-                outmulti.append(pol)
-
-    return sgeom.MultiPolygon(outmulti)
+    return (multipoly1.symmetric_difference(multipoly2)).difference(multipoly2)
 
 
 land_geom = unary_union(list(shpreader.Reader(land_shp_fname).geometries()))
@@ -42,10 +29,15 @@ def is_land(x, y):
     return land.contains(sgeom.Point(x, y))
 
 
+def repeat_until(set_function, check_function):
+    value = set_function()
+    while not check_function(value):
+        value = set_function()
+    return value
+
+
 def get_coord():
-    coord = []
-    while True:
-        coord = [(random() * 2 - 1) * 180, (acos(2 * random() - 1) / pi) * 180 - 90]
-        if is_land(*coord):
-            break
-    return coord
+    return repeat_until(
+        lambda: [(random() * 2 - 1) * 180, (acos(2 * random() - 1) / pi) * 180 - 90],
+        lambda coord: is_land(*coord) and coord[1] > -65,
+    )
