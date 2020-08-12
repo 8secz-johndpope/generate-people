@@ -1,15 +1,11 @@
 from PIL import Image
 import os
 from glob import glob
-from shutil import rmtree
+from cleanfolder import clean_folder
 
 
 def convert_jpg():
-    if os.path.exists("dist/images") and os.path.isdir("dist/images"):
-        rmtree("dist/images")
-
-    if not os.path.exists("dist/images"):
-        os.makedirs("dist/images")
+    clean_folder("dist/images")
 
     recentDir = max(
         glob(
