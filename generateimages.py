@@ -12,7 +12,7 @@ def generate_images(seeds):
     sc.num_gpus = 1
     sc.submit_target = dnnlib.SubmitTarget.LOCAL
     sc.local.do_not_copy_source_files = True
-    sc.run_dir_root = "dist/generated-images-1"
+    sc.run_dir_root = "dist/generated-images"
     sc.run_desc = "generate_images"
 
     kwargs = {
@@ -22,7 +22,3 @@ def generate_images(seeds):
     }
 
     dnnlib.submit_run(sc, "run_generator.generate_images", **kwargs)
-
-
-if __name__ == "__main__":
-    generate_images(randint(100000000, 1000000000, 5))

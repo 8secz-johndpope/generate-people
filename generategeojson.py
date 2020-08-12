@@ -4,8 +4,8 @@ import json
 def generate_feature(person):
     return {
         "type": "Feature",
-        "properties": {"title": person.name},
-        "geometry": {"coordinates": person.location, "type": "Point"},
+        "properties": {"title": person["name"]},
+        "geometry": {"coordinates": person["location"], "type": "Point"},
     }
 
 
